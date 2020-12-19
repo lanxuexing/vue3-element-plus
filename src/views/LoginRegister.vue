@@ -4,9 +4,25 @@
     <div class="form-container">
       <div class="signin-signup">
         <!-- 登录 -->
-        <h1>登录</h1>
+        <el-form label-width="100px" class="loginForm sign-in-form">
+          <el-form-item label="邮箱" prop="email">
+            <el-input placeholder="请输入邮箱账号"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="password">
+            <el-input
+              type="password"
+              placeholder="请输入密码"
+            ></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" class="submit-btn">提交</el-button>
+          </el-form-item>
+          <!-- 找回密码 -->
+          <div class="tiparea">
+            <p>忘记密码？<a href="">立即找回</a></p>
+          </div>
+        </el-form>
         <!-- 注册 -->
-        <h1>注册</h1>
       </div>
     </div>
     <!-- 左右切换动画 -->
@@ -15,7 +31,9 @@
         <div class="content">
           <h3>学习是为了有更多的选择，让生活变得更加美好！</h3>
           <p>路漫漫其修远兮，吾将上下而求索。</p>
-          <button @click="signUpMode = !signUpMode" class="btn transparent">注册</button>
+          <button @click="signUpMode = !signUpMode" class="btn transparent">
+            注册
+          </button>
         </div>
         <img src="@/assets/img/log.svg" class="image" alt="login" />
       </div>
@@ -23,7 +41,9 @@
         <div class="content">
           <h3>以人为镜，可明得失。以码为镜，可通逻辑！</h3>
           <p>路漫漫其修远兮，吾将上下而求索。</p>
-          <button @click="signUpMode = !signUpMode" class="btn transparent">登录</button>
+          <button @click="signUpMode = !signUpMode" class="btn transparent">
+            登录
+          </button>
         </div>
         <img src="@/assets/img/register.svg" class="image" alt="register" />
       </div>
@@ -400,7 +420,26 @@ form.sign-up-form {
   box-shadow: 0px 5px 10px #cccc;
 }
 
-.submit_btn {
+/* form表单 */
+.loginForm {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px 40px 20px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px #cccc;
+}
+
+.submit-btn {
   width: 100%;
+}
+
+.tiparea {
+  text-align: right;
+  font-size: 12px;
+  color: #333;
+}
+
+.tiparea p a {
+  color: #409eff;
 }
 </style>
