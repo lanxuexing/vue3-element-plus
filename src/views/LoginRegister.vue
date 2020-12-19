@@ -4,18 +4,28 @@
     <div class="form-container">
       <div class="signin-signup">
         <!-- 登录 -->
-        <el-form label-width="100px" class="loginForm sign-in-form">
+        <el-form
+          ref="loginForm"
+          :mode="loginUser"
+          :rules="rules"
+          label-width="100px"
+          class="loginForm sign-in-form"
+        >
           <el-form-item label="邮箱" prop="email">
-            <el-input placeholder="请输入邮箱账号"></el-input>
+            <el-input
+              placeholder="请输入邮箱账号"
+              v-model="loginUser.email"
+            ></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password">
             <el-input
               type="password"
               placeholder="请输入密码"
+              v-model="loginUser.password"
             ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" class="submit-btn">提交</el-button>
+            <el-button @click="handleLogin('loginForm')" type="primary" class="submit-btn">提交</el-button>
           </el-form-item>
           <!-- 找回密码 -->
           <div class="tiparea">
@@ -52,16 +62,54 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, getCurrentInstance } from "vue";
 
 export default defineComponent({
   name: "LoginRegister",
   components: {},
   setup() {
+    // 当前的实例
+    const { ctx } = getCurrentInstance() as any;
     const signUpMode = ref(false);
+    // 表单数据对象
+    const loginUser = ref({
+      email: '',
+      password: '',
+    });
+    // 表单校验规则
+    const rules = ref({
+      email: [
+        {
+          type: 'email',
+          message: '邮箱格式不正确',
+          required: true,
+          trigger: 'blur'
+        }
+      ],
+      password: [
+        {
+          message: '密码不能为空',
+          required: true,
+          trigger: 'blur'
+        },
+        {
+          min: 6,
+          max: 30,
+          message: '密码长度为6-30位',
+          trigger: 'blur'
+        }
+      ],
+    });
+    // 登录
+    const handleLogin = (formName: string) => {
+      console.log(ctx.$refs, formName);
+    }
 
     return {
       signUpMode,
+      loginUser,
+      rules,
+      handleLogin
     };
   },
 });
