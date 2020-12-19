@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" :class="{ 'sign-up-mode': signUpMode }">
     <!-- form表单容器 -->
     <div class="form-container">
       <div class="signin-signup">
@@ -15,29 +15,36 @@
         <div class="content">
           <h3>学习是为了有更多的选择，让生活变得更加美好！</h3>
           <p>路漫漫其修远兮，吾将上下而求索。</p>
-          <button class="btn transparent">注册</button>
+          <button @click="signUpMode = !signUpMode" class="btn transparent">注册</button>
         </div>
-        <img src="@/assets/img/log.svg" class="image" alt="login">
+        <img src="@/assets/img/log.svg" class="image" alt="login" />
       </div>
       <div class="panel right-panel">
-         <div class="content">
+        <div class="content">
           <h3>以人为镜，可明得失。以码为镜，可通逻辑！</h3>
           <p>路漫漫其修远兮，吾将上下而求索。</p>
-          <button class="btn transparent">登录</button>
+          <button @click="signUpMode = !signUpMode" class="btn transparent">登录</button>
         </div>
-        <img src="@/assets/img/register.svg" class="image" alt="register">
+        <img src="@/assets/img/register.svg" class="image" alt="register" />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
-  name: 'LoginRegister',
-  components: {}
-})
+  name: "LoginRegister",
+  components: {},
+  setup() {
+    const signUpMode = ref(false);
+
+    return {
+      signUpMode,
+    };
+  },
+});
 </script>
 
 <style scoped>
